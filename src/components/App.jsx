@@ -7,20 +7,36 @@ import Education from "../components/Education.jsx";
 import Experience from "../components/Experience.jsx";
 import Certificates from "../components/Certificates.jsx";
 import Skills from "../components/Skills.jsx";
-import Social from "../components/Social.jsx"
+import useGetData from "../hooks/useGetData";
 
 const App = () => {
-    return (
+    const data = useGetData();
+    console.log(data);
+    return data.length === 0 ? <h3>Cargando</h3>:(
         <Main>
             <Sidebar>
-                <About />
-                <Social />
+                <About
+                    avatar = {data.avatar}
+                    name = {data.name}
+                    profession = {data.profession}
+                    bio={data.bio}
+                    address={data.address}
+                    social={data.social}
+                />
             </Sidebar>
             <Info>
-                <Education />
-                <Experience />
-                <Certificates />
-                <Skills />
+                <Education
+                    data = {data.education}
+                />
+                <Experience
+                    data = {data.experience}
+                />
+                <Certificates
+                    data = {data.certificate}
+                />
+                <Skills
+                    data = {data.skills}
+                />
             </Info>
         </Main>
     );
